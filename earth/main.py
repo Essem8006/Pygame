@@ -14,13 +14,12 @@ red = (255, 0, 0)
 screen_height = 500
 screen_width = 500
 
-img = Image.open('earth/1200x600.jpeg')
+img = Image.open('../image.jpg')
 img_data = img.getdata()
 size = img.size
 
 screen = pygame.display.set_mode((screen_width, screen_height))
 pygame.display.set_caption("Earth")
-pygame.display.set_icon(pygame.image.load('earth/Earth.32.png'))
 running = True
 
 rotation = 0
