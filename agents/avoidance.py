@@ -9,8 +9,8 @@ pygame.init()
 black = (0, 0, 0)
 red = (255, 0, 0)
 green = (0, 255, 0)
-screen_height = 700
-screen_width = 1200
+screen_height = 500
+screen_width = 500
 
 screen = pygame.display.set_mode((screen_width, screen_height))
 pygame.display.set_caption("Agents")
@@ -18,10 +18,10 @@ pygame.display.set_caption("Agents")
 #init
 agents = []# x, y, theta
 agents2 = []# x, y, theta
-for i in range(10000):
-    agents.append((20*math.cos(pi*i/5000)+screen_width/2,20*math.sin(pi*i/5000)+screen_height/2,pi*i/5000))
+#for i in range(10000):
+    #agents.append((20*math.cos(pi*i/5000)+screen_width/2,20*math.sin(pi*i/5000)+screen_height/2,pi*i/5000))
 for i in range(5000):
-    #agents.append((random.random()*screen_width,random.random()*screen_height, random.random()*2*pi))
+    agents.append((random.random()*screen_width,random.random()*screen_height, random.random()*2*pi))
     agents2.append((random.random()*screen_width,random.random()*screen_height, random.random()*2*pi))
 
 running = True
