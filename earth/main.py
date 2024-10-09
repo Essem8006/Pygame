@@ -14,7 +14,7 @@ red = (255, 0, 0)
 screen_height = 500
 screen_width = 500
 
-img = Image.open('../image.jpg')
+img = Image.open("earth/image.jpg")
 img_data = img.getdata()
 size = img.size
 
