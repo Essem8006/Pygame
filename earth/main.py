@@ -14,7 +14,7 @@ red = (255, 0, 0)
 screen_height = 500
 screen_width = 500
 
-img = Image.open("8k_earth_daymap.jpg")
+img = Image.open("earth/8k_earth_daymap.jpg")
 img_data = img.getdata()
 size = img.size
 
