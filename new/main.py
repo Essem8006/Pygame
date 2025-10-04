@@ -30,38 +30,28 @@ def skyColGradient(y):
     segments = settings['sky_segments']
     day_top = (99, 207, 246)
     day_bottom = (160, 219, 235)
-    sunset_top = (17, 21, 68)
-    sunset_bottom = (158, 72, 97)
+    sunset_top = (187, 61, 55)
+    sunset_bottom = (254, 149, 46)
+    last_light_top = (17, 21, 68)
+    last_light_bottom = (158, 72, 97)
     night_top = (24, 5, 1)
     night_bottom = (19, 13, 52)
     y/=screen_dimention
-    if y < 0.25:
-        return gradient(day_top,day_bottom,segments)
-    elif y > 0.75:
-        return gradient(night_top,night_bottom,segments)
-    else:
-        diff = 1-abs(2*y-1)*2
-        if y < 0.5:
-            top = mixCol(day_top,sunset_top,diff)
-            bottom = mixCol(day_bottom,sunset_bottom,diff)
-            return gradient(top,bottom,segments)
-        else:
-            top = mixCol(night_top,sunset_top,diff)
-            bottom = mixCol(night_bottom,sunset_bottom,diff)
-            return gradient(top,bottom,segments)
+
+    grad = [
+        ((99, 207, 246), (160, 219, 235), 0.25),
+        ((187, 61, 55), (254, 149, 46), 0.5),
+        ((17, 21, 68), (158, 72, 97), 0.625),
+        ((24, 5, 1), (19, 13, 52), 0.75)
+    ]
+    return changingGradient(grad,y,segments)
 
 def sunColGradient(y):
     col = [(254, 254, 223),
-    (255, 251, 123),
-    (255, 235, 53),
-    (254, 207, 34),
-    (253, 174, 53),
-    (252, 132, 13),
-    (255, 103, 15),
-    (233, 70, 5)]
+    (255, 221, 131),
+    (255, 221, 131)]
     y /=screen_dimention
-    y *= 10
-    y = min(y,7)
+    y *= 2
     lower = col[math.floor(y)]
     higher = col[math.ceil(y)]
     diff = y - math.floor(y)
@@ -70,7 +60,7 @@ def sunColGradient(y):
 class Sun:
     def __init__(self):
         self.pos = (60,60)
-        self.r = 30
+        self.r = 179*250/1023
         self.col = (254, 254, 223)
         self.sky_col = skyColGradient(self.pos[1])
     def update(self, pos):

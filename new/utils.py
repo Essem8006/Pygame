@@ -12,6 +12,20 @@ def gradient(a,b,segments):
         cols.append(mixCol(a,b,i/(segments-1)))
     return cols
 
+def changingGradient(grad,y,segments):
+    top_start = grad[0][0]
+    bottom_start = grad[0][1]
+    start = 0
+    for top,bottom,when in grad:
+        if y < when:
+            diff = (y-start)/(when-start)
+            return gradient(mixCol(top_start,top,diff),mixCol(bottom_start,bottom,diff),segments)
+        else:
+            top_start = top
+            bottom_start = bottom
+            start = when
+    return gradient(top_start,bottom_start,segments)
+
 
 def getMountains(width,height):
     """(0,134),
