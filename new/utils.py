@@ -26,6 +26,11 @@ def changingGradient(grad,y,segments):
             start = when
     return gradient(top_start,bottom_start,segments)
 
+def lighter(col,percent):
+    light = []
+    for i in range(3):
+        light.append(min(255,max(0,col[i]*(1+percent))))
+    return light
 
 def getMountains(width,height):
     """(0,134),
@@ -119,3 +124,6 @@ def getMountains(width,height):
             section.append((x*width/224,y*height/134))
         points.append(section)
     return points
+
+if __name__ == '__main__':
+    print('WHAT ARE YOU DOING!')
