@@ -2,10 +2,10 @@
 Ispired by Sebastian Lague
 
 ## Main
-Why does this still exist
-
-## Avoidence
 Might make into a working version but not bothered
+
+## Try2
+Reworked
 
 ## Todo
 * Everything
