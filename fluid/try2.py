@@ -7,10 +7,9 @@ from utils import *
 pygame.init()
 
 
-draw_density = True
-gravity = 0#9.81
+gravity = 9.81/60
 damping = 0.99
-big_n = 200
+big_n = 1000
 
 
 white = (255, 255, 255)
@@ -32,12 +31,11 @@ class Particle:
         self.pos = [x*screen_width, y*screen_height]
         self.vel = [0,0]
     def update(self, offset):
-        acceleration = [0,gravity/60]
+        acceleration = [0,gravity]
         grad = gradient(particles, self.pos)
         for i in range(2):
-            acceleration[i] += grad[i]
             self.vel[i] *= damping
-            self.vel[i] +=acceleration[i]
+            self.vel[i] += acceleration[i] + grad[i]
             self.pos[i] +=self.vel[i] + offset[i]
             if self.pos[i] < 0:
                 self.pos[i] *= -1
@@ -52,9 +50,13 @@ class Particle:
 running = True
 clock = pygame.time.Clock()
 
-particles = []#position, velocity
+particles = []
 for i in range(big_n):
     particles.append(Particle(random.random(), random.random()))
+
+# for drawing density
+quality = 50
+ratio = screen_height/quality
 
 while running:
     #events
@@ -68,17 +70,15 @@ while running:
             if screen_pos:
                     window_offset = [screen_pos[0] - event.x, screen_pos[1] - event.y]
             screen_pos = [event.x, event.y]
-        elif event.type == pygame.MOUSEBUTTONDOWN:
-            particles.append(Particle(event.pos[0]/screen_width, event.pos[1]/screen_height))
+        #elif event.type == pygame.MOUSEBUTTONDOWN:
+        #    particles.append(Particle(event.pos[0]/screen_width, event.pos[1]/screen_height))
 
-    if draw_density:
-        quality = 50
-        ratio = screen_height/quality
-        for i in range(quality):
-            for j in range(quality):
-                pygame.draw.rect(screen, (0, min(max(math.floor(60*density(particles, (i+0.5)*ratio, (j+0.5)*ratio)), 0), 255), 0), [i*ratio, j*ratio, ratio, ratio])
-    else:
-        pygame.draw.rect(screen, black, [0, 0, screen_width, screen_height])
+    #quality = 50
+    #ratio = screen_height/quality
+    #for i in range(quality):
+    #    for j in range(quality):
+    #        pygame.draw.rect(screen, (0, min(max(math.floor(60*density(particles, (i+0.5)*ratio, (j+0.5)*ratio)), 0), 255), 0), [i*ratio, j*ratio, ratio, ratio])
+    pygame.draw.rect(screen, black, [0, 0, screen_width, screen_height])
 
     for part in particles:
         part.update(window_offset)
