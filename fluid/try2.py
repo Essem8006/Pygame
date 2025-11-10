@@ -43,7 +43,7 @@ class Particle:
             elif self.pos[i] > screen_height:
                 self.pos[i] = 2 * screen_height - self.pos[i]
                 self.vel[i] *= -1
-        self.draw()
+        #self.draw()
     def draw(self):
         pygame.draw.circle(screen, (255, 255, 255, 255), (self.pos[0], self.pos[1]), 2)
  
@@ -73,12 +73,12 @@ while running:
         #elif event.type == pygame.MOUSEBUTTONDOWN:
         #    particles.append(Particle(event.pos[0]/screen_width, event.pos[1]/screen_height))
 
-    #quality = 50
-    #ratio = screen_height/quality
-    #for i in range(quality):
-    #    for j in range(quality):
-    #        pygame.draw.rect(screen, (0, min(max(math.floor(60*density(particles, (i+0.5)*ratio, (j+0.5)*ratio)), 0), 255), 0), [i*ratio, j*ratio, ratio, ratio])
-    pygame.draw.rect(screen, black, [0, 0, screen_width, screen_height])
+    quality = 50
+    ratio = screen_height/quality
+    for i in range(quality):
+        for j in range(quality):
+            pygame.draw.rect(screen, (0, min(max(math.floor(60*density(particles, (i+0.5)*ratio, (j+0.5)*ratio)), 0), 255), 0), [i*ratio, j*ratio, ratio, ratio])
+    #pygame.draw.rect(screen, black, [0, 0, screen_width, screen_height])
 
     for part in particles:
         part.update(window_offset)
