@@ -2,10 +2,7 @@
 Ispired by Sebastian Lague
 
 ## Main
-Might make into a working version but not bothered
+Having hit my limit with python I plan to continue in c++
 
-## Try2
-Reworked
 
-## Todo
-* Everything
+
