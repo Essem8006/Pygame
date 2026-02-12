@@ -1,7 +1,14 @@
 # Falling particles simulation
 
 ## Main
-Simulates particles falling and then creating piles.
+Simulates particles falling and then creating piles. Similar to sand or rice.
 
 ## Todo
-* Turns into a drawing app if you have enough particles on screen at once!
+
+Resizing window size
+
+# Building
+
+Simple as it gets:
+- Install pygame
+- Run main.py
