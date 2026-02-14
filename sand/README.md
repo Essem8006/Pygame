@@ -1,11 +1,7 @@
 # Falling particles simulation
 
-## Main
 Simulates particles falling and then creating piles. Similar to sand or rice.
-
-## Todo
-
-Resizing window size
+One of my first projects, recently tidied up.
 
 # Building
 

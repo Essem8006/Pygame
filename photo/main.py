@@ -56,7 +56,8 @@ class Sun:
         self.col = (254, 254, 223)
         self.sky_col = skyColGradient(self.pos[1])
     def update(self, pos):
-        self.pos = pos
+
+        self.pos = (self.pos[0]+ (pos[0]-self.pos[0])/10, self.pos[1]+ (pos[1]-self.pos[1])/10)
         self.col = sunColGradient(self.pos[1])
         self.sky_col = skyColGradient(self.pos[1])
     def draw(self):

@@ -1,32 +1,17 @@
-# Pygame
-Little pygame projects using my favourite prototyping language - python!
-Any that I like enough I'll code in C++
+# Miniture Pygame Python Projects<br>
 
-* Sand - done
-* Agents - done
-* Earth - done
-* Fluid - not even close
-* Multi-window - starting out
-
-# Miniture Pygame Projects<br>
-
-SDR++ is a cross-platform and open source SDR software with the aim of being bloat free and simple to use.
+Little pygame projects with the purpose of looking nice or showcasing a technical ability.
 
 ![Build](https://github.com/AlexandreRouma/SDRPlusPlus/workflows/Build%20Binaries/badge.svg)
 
-* [Patreon](https://patreon.com/ryzerth)
-* [Discord Server](https://discord.gg/aFgWjyD)
-* [Reddit](https://www.reddit.com/r/sdrpp/)
-* IRC: `#sdrpp` ([libera.chat](https://libera.chat)) __**NO LONGER ACTIVE, JOIN DISCORD INSTEAD**__
+## Projects
 
-## Features
-
-* Multi VFO
-* Wide hardware support (both through SoapySDR and dedicated modules)
-* SIMD accelerated DSP
-* Cross-platform (Windows, Linux, MacOS and BSD)
-* Full waterfall update when possible. Makes browsing signals easier and more pleasant
-* Modular design (easily write your own plugins)
+* Sand - falling particles
+* Agentic behaviour - inspired by one of Sebastian Lague's projects
+* Earth - mapping an image to a spinning sphere
+* Fluid simulation - more care taken to make it lightweight than accurate
+* Multi-window interaction - coordinating behaviour between windows
+* Photo - closest I'll get to an artist
 
 # Installing
 

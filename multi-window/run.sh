@@ -7,3 +7,5 @@ do
     python3 main.py
     python3 second.py
 done
+
+# not working
