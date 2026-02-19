@@ -31,6 +31,7 @@ class Area:
             [x*screen_width, y*screen_height-1],
             [x*screen_width, y*screen_height+1],
         ]
+    def update(self):
         # apply gravity to move points
 
         # get collisions to mark some points as unable to expand
