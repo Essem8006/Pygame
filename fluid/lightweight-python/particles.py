@@ -7,9 +7,11 @@ pygame.init()
 
 
 gravity = 9.81
-damping = 0.125
+damping = 0.0125
 debug = True
 N = 10
+
+
 
 width = 500/(2*(N+1))
 line_scale = width - 1
@@ -28,12 +30,17 @@ pygame.display.set_caption("Fluid")
 class Point:
     def __init__(self, x, y):
         self.value = random.random()
+        self.velocity = [0,0,0,0]
+
         self.pos = [x*screen_width, y*screen_height]
         self.flow = [0,0,0,0]
 
     def update(self, surrounding):
         for i in range(4):
-            self.flow[i] = max(self.value - surrounding[i], 0) * damping
+            self.velocity[i] *= 0.95
+            self.velocity[i] += max(self.value - surrounding[i], 0) * damping
+            self.flow[i] = self.velocity[i]
+        # error check
         if self.value > 1:
             print(self.value)
 
