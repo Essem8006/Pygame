@@ -1,4 +1,3 @@
-
 import pygame
 import random
 import math
@@ -9,7 +8,7 @@ pygame.init()
 gravity = 9.81
 damping = 0.0125
 debug = True
-N = 10
+N = 30
 
 
 
@@ -39,23 +38,47 @@ class Point:
         self.flow = [0,0,0,0]
 
     def update(self, surrounding):
-        self.velocity[0] += gravity /60
+
+        self.velocity[0] += 0.01# + window_offset[1] * 0.002   # down
+        #self.velocity[2] +=       - window_offset[1] * 0.002   # up
+        #self.velocity[1] +=       - window_offset[0] * 0.002   # right
+        #self.velocity[3] +=         window_offset[0] * 0.002   # left
+
         for i in range(4):
             self.velocity[i] *= 0.95
             self.velocity[i] += max(self.value - surrounding[i], 0) * damping
-            self.flow[i] = self.velocity[i]
+            
+            if surrounding[i] >= 1.0:
+                self.flow[i] = 0.0  # cell is full, don't push in
+            else:
+                available = 1.0 - surrounding[i]
+                self.flow[i] = min(self.velocity[i], self.value * 0.25, available)
+
+        
+        
         # error check
+        if sum(self.flow) > self.value:
+            #print(self.value)
+            pass
+
         if self.value > 1:
-            print(self.value)
+            #print(self.value)
+            pass
 
     def draw(self):
-        pygame.draw.rect(screen, (0,cap_col(255*self.value),0), [self.pos[0]-width, self.pos[1]-width, 2*width, 2*width])
+        if self.value > 0.5:
+            color = (0, 0, 200)  # solid blue
+        elif self.value > 0.1:
+            color = (0, 0, int(200 * self.value * 2))  # partial
+        else:
+            color = black
+        pygame.draw.rect(screen, color, [self.pos[0]-width, self.pos[1]-width, 2*width, 2*width])
         pygame.draw.circle(screen, white, (self.pos[0], self.pos[1]), 2)
         pygame.draw.line(screen, white, (self.pos[0], self.pos[1]), (self.pos[0], self.pos[1]+self.flow[0]*line_scale))
         pygame.draw.line(screen, white, (self.pos[0], self.pos[1]), (self.pos[0]+self.flow[1]*line_scale, self.pos[1]))
         pygame.draw.line(screen, white, (self.pos[0], self.pos[1]), (self.pos[0], self.pos[1]-self.flow[2]*line_scale))
         pygame.draw.line(screen, white, (self.pos[0], self.pos[1]), (self.pos[0]-self.flow[3]*line_scale, self.pos[1]))
- 
+
 running = True
 clock = pygame.time.Clock()
 
@@ -66,37 +89,31 @@ for j in range(N):
         points[j].append(Point( (i+1)/(N+1), (j+1)/(N+1) ))
 
 while running:
+    #screen_pos = get_window_position()
+    #window_offset = [prev_window_pos[0] - screen_pos[0], 
+    #                 prev_window_pos[1] - screen_pos[1]]
+    #prev_window_pos = screen_pos
     #events
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
         elif event.type == pygame.WINDOWMOVED:
-            pass # todo
+            print('_________')
+            #if screen_pos:
+            #        window_offset = [screen_pos[0] - event.x, screen_pos[1] - event.y]
+            #screen_pos = [event.x, event.y]
+    x, y = pygame.display.get_window_position()
+    print(x, y)
 
     pygame.draw.rect(screen, black, [0, 0, 500, 500])
 
     # get flow
     for y in range(N):
         for x in range(N):
-            if y == 0:
-                up = points[y][x].value
-                down = points[y+1][x].value
-            elif y == N-1:
-                up = points[y-1][x].value
-                down = points[y][x].value
-            else:
-                up = points[y-1][x].value
-                down = points[y+1][x].value
-            
-            if x == 0:
-                left = points[y][x].value
-                right = points[y][x+1].value
-            elif x == N-1:
-                left = points[y][x-1].value
-                right = points[y][x].value
-            else:
-                left = points[y][x-1].value
-                right = points[y][x+1].value
+            up    = points[y-1][x].value if y > 0   else 1.0
+            down  = points[y+1][x].value if y < N-1 else 1.0
+            left  = points[y][x-1].value if x > 0   else 1.0
+            right = points[y][x+1].value if x < N-1 else 1.0
             
             surround = [down, right, up, left]
             points[y][x].update(surround)
